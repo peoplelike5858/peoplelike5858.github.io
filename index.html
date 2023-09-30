@@ -70,11 +70,39 @@
         .show {
           display: block;
         }
+
+        /* 加载动画 */
+        .loader-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-      <div id="black-1">
+      <div id="black-1" class="show">
           <!-- 第一区块：图片 -->
           <div class="content image-container">
               <img src="your-image-url.jpg" alt="图片描述">
@@ -84,22 +112,27 @@
           <div class="content login-container">
               <h2>登录</h2>
               <form>
-                  <input type="text" placeholder="请输入您的账号" required id="account">
+                  <input type="text" placeholder="请输入您的账号" required id="account" name="account">
                   <br>
-                  <input type="password" placeholder="请输入您的密码" required id="password">
+                  <input type="text" placeholder="请输入您的密码" required id="password" name="password">
                   <br>
-                  <button type="submit" onclick="login()">登录</button>
+                  <button type="button" onclick="login()">登录</button>
               </form>
           </div>
       </div>
 
-      <div id="black-2">
+      <!-- 加载动画容器和加载动画 -->
+      <div id="loader-container" class="loader-container">
+        <div class="loader"></div>
+      </div>
+
+      <div id="black-2" class="hidden">
         第二塊
 
         <button onclick="handleNext(2)">下一步</button>
       </div>
 
-      <div id="black-3">
+      <div id="black-3" class="hidden">
         第三塊
 
         <button onclick="handleNext(3)">下一步</button>
@@ -110,9 +143,16 @@
       const black2 = document.getElementById('black-2')
       const black3 = document.getElementById('black-3')
 
+        // 获取加载动画容器和加载动画元素
+        let loaderContainer = document.getElementById('loader-container');
+        let loader = document.getElementById('loader');
+
       function login () {
-        let account = document.getElementById('account').value
-        let password = document.getElementById('password').value
+        const account = document.getElementById('account').value
+        const password = document.getElementById('password').value
+
+        //  显示加载动画
+        loaderContainer.style.display = 'flex';
 
         if(account === 'JinMin1115' && password === '3yearhappyday') {
           console.log('登錄成功');
@@ -120,13 +160,15 @@
           black1.classList.remove('show')
           black1.classList.add('hidden')
 
-          black2.classList.remove('hidden')
-          black2.classList.add('show')
+          setTimeout(() => {
+            // 隐藏加载动画
+            loaderContainer.style.display = 'none';
+
+            black2.classList.remove('hidden')
+            black2.classList.add('show')
+          }, 2000)
         }else {
           console.log('登錄失敗');
-
-          account = undefined
-          password = undefined
         }
       }
 
@@ -144,11 +186,6 @@
           black1.classList.remove('hidde')
           black1.classList.add('show')
         }
-      }
-
-      window.onload = () => {
-        black2.classList.add('hidden')
-        black3.classList.add('hidden')
       }
     </script>
 </body>
