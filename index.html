@@ -84,9 +84,9 @@
           <div class="content login-container">
               <h2>登录</h2>
               <form>
-                  <input type="text" placeholder="请输入您的账号" required>
+                  <input type="text" placeholder="请输入您的账号" required id="account">
                   <br>
-                  <input type="password" placeholder="请输入您的密码" required>
+                  <input type="password" placeholder="请输入您的密码" required id="password">
                   <br>
                   <button type="submit" onclick="login()">登录</button>
               </form>
@@ -111,11 +111,23 @@
       const black3 = document.getElementById('black-3')
 
       function login () {
-        black1.classList.remove('show')
-        black1.classList.add('hidden')
+        let account = document.getElementById('account').value
+        let password = document.getElementById('password').value
 
-        black2.classList.remove('hidden')
-        black2.classList.add('show')
+        if(account === 'JinMin1115' && password === '3yearhappyday') {
+          console.log('登錄成功');
+
+          black1.classList.remove('show')
+          black1.classList.add('hidden')
+
+          black2.classList.remove('hidden')
+          black2.classList.add('show')
+        }else {
+          console.log('登錄失敗');
+
+          account = undefined
+          password = undefined
+        }
       }
 
       function handleNext (num) {
