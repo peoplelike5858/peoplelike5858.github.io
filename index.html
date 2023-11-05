@@ -19,8 +19,22 @@
           margin: 0 auto;
       }
 
-      #black-1 {
+      #block-1 {
         padding: 20px;
+      }
+
+      #block-2 {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .block-2-button {
+        color: #333;
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
       }
   
       .content {
@@ -120,7 +134,7 @@
 </head>
 <body>
     <div class="container">
-      <div id="black-1" class="show">
+      <div id="block-1" class="show">
           <!-- 第一区块：图片 -->
           <div class="content image-container">
               <img src="./img/giphy_2.gif" alt="图片描述">
@@ -144,13 +158,12 @@
         <div class="loader"></div>
       </div>
 
-      <div id="black-2" class="hidden">
-        第二塊
-        <iframe max-width="560" max-height="315" src="https://www.youtube.com/embed/UcPmJKa74wM?si=-NizUK0815_XR_f4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <button onclick="handleNext(2)">下一步</button>
+      <div id="block-2" class="hidden">
+        <video src="./video/720803854.452502.mp4" controls width="100%" height="800px"></video>
+        <button class="block-2-button" onclick="handleNext(2)">點下去</button>
       </div>
 
-      <div id="black-3" class="hidden">
+      <div id="block-3" class="hidden">
         <img class="love-img" src="./img/giphy_1.gif" alt="">
         <img class="love-img" src="./img/giphy.gif" alt="">
 
@@ -162,9 +175,9 @@
       </div>
     </div>
     <script>
-      const black1 = document.getElementById('black-1')
-      const black2 = document.getElementById('black-2')
-      const black3 = document.getElementById('black-3')
+      const block1 = document.getElementById('block-1')
+      const block2 = document.getElementById('block-2')
+      const block3 = document.getElementById('block-3')
 
         // 获取加载动画容器和加载动画元素
         let loaderContainer = document.getElementById('loader-container');
@@ -180,15 +193,15 @@
         if(account === 'JinMin1115' && password === '2yearhappyday') {
           console.log('登錄成功');
 
-          black1.classList.remove('show')
-          black1.classList.add('hidden')
+          block1.classList.remove('show')
+          block1.classList.add('hidden')
 
           setTimeout(() => {
             // 隐藏加载动画
             loaderContainer.style.display = 'none';
 
-            black2.classList.remove('hidden')
-            black2.classList.add('show')
+            block2.classList.remove('hidden')
+            block2.classList.add('show')
           }, 2000)
         }else {
           alert('登錄失敗了')
@@ -198,17 +211,17 @@
 
       function handleNext (num) {
         if(num === 2) {
-          black2.classList.remove('show')
-          black2.classList.add('hidden')
+          block2.classList.remove('show')
+          block2.classList.add('hidden')
 
-          black3.classList.remove('hidden')
-          black3.classList.add('show')
+          block3.classList.remove('hidden')
+          block3.classList.add('show')
         }else {
-          black3.classList.remove('show')
-          black3.classList.add('hidden')
+          block3.classList.remove('show')
+          block3.classList.add('hidden')
 
-          black1.classList.remove('hidde')
-          black1.classList.add('show')
+          block1.classList.remove('hidde')
+          block1.classList.add('show')
         }
       }
     </script>
